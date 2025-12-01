@@ -1,0 +1,139 @@
+/* ============================================
+   PARADISET DESIGN SYSTEM
+   Braun-inspired minimalism with functional color
+   ============================================ */
+
+/* === RESET & BASE === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === COLOR SYSTEM === */
+:root {
+  /* Backgrounds */
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #F5F5F5;
+  
+  /* Text */
+  --text-primary: #0A0A0A;
+  --text-secondary: #525252;
+  
+  /* Functional accents (Braun-inspired) */
+  --accent-alert: #D32F2F;    /* Red - hierarchy markers */
+  --accent-active: #2E7D32;   /* Green - interactive states */
+  --accent-warning: #F9A825;  /* Yellow - calls to action */
+  
+  /* Structural elements */
+  --border-color: #E0E0E0;
+}
+
+/* === TYPOGRAPHY SCALE === */
+:root {
+  /* Families */
+  --font-display: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  
+  /* Scale (modular) */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.5rem;     /* 24px */
+  --text-2xl: 2rem;      /* 32px */
+  --text-3xl: 3rem;      /* 48px */
+  
+  /* Line heights */
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+}
+
+/* === SPACING SYSTEM === */
+:root {
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 1rem;     /* 16px */
+  --space-md: 1.5rem;   /* 24px */
+  --space-lg: 2rem;     /* 32px */
+  --space-xl: 3rem;     /* 48px */
+  --space-2xl: 4rem;    /* 64px */
+}
+
+/* === BASE STYLES === */
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+/* === TYPOGRAPHY ELEMENTS === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+
+/* Red dot hierarchy marker */
+h1::before,
+h2::before {
+  content: "•";
+  color: var(--accent-alert);
+  margin-right: 0.5rem;
+}
+
+p {
+  margin-bottom: var(--space-sm);
+}
+
+/* === LINKS === */
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color 0.2s ease;
+}
+
+a:hover {
+  border-bottom-color: var(--accent-active);
+}
+
+/* === CODE & MONO === */
+code, pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+pre {
+  background-color: var(--bg-secondary);
+  padding: var(--space-md);
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+}
+
+/* === UTILITY === */
+.container {
+  max-width: 65ch; /* Optimal reading width */
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.container--wide {
+  max-width: 90ch;
+}

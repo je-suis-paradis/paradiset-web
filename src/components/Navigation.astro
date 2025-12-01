@@ -1,0 +1,46 @@
+---
+// No props needed for now - static navigation
+---
+
+<nav class="navigation">
+  <ul class="nav-list">
+    <li><a href="/">Home</a></li>
+    <li><a href="/essays">Essays</a></li>
+    <li><a href="/notes">Notes</a></li>
+    <li><a href="/work">Work</a></li>
+  </ul>
+  <div class="nav-divider">═══════════════════════════════════════</div>
+</nav>
+
+<style>
+  .navigation {
+    padding: var(--space-lg) 0;
+  }
+
+  .nav-list {
+    display: flex;
+    gap: var(--space-lg);
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-list a {
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .nav-list a:hover {
+    border-bottom-color: var(--accent-active);
+  }
+
+  .nav-divider {
+    margin-top: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    overflow: hidden;
+  }
+</style>
