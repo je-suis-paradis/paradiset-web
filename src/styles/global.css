@@ -78,6 +78,46 @@ body {
   background-color: var(--bg-primary);
 }
 
+/* === IMAGE LAYOUTS === */
+/* DEFAULT */
+.essay-content img {
+  max-width: 100%;
+  height: auto;
+  margin: var(--space-lg) 0;
+  border: 1px solid var(--border-color);
+}
+
+/* FULL-BLEED */
+.essay-content img.full-bleed {
+  width: 100vw;
+  max-width: 100%;
+  margin-left: 50%
+  translateX(-50%);
+  border: none;
+  border-top: 1px solid var(--border-color );
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* === FLOAT LEFT & RIGHT === */
+.essay-content img.float-left {
+  float: left;
+  max-width: 40%;
+  margin: var(--space-sm) var(--space-lg) var(--space-md) 0;
+}
+
+.essay-content img.float-right {
+  float: right;
+  max-width: 40%;
+  margin: var(--space-sm) 0 var(--space-md) var(--space-lg);
+}
+
+/* CLEAR FLOATS */
+.essay-content p::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 /* === TYPOGRAPHY ELEMENTS === */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
@@ -100,6 +140,35 @@ h2::before {
 
 p {
   margin-bottom: var(--space-sm);
+}
+
+/* === PULL QUOTES === */
+
+.pullquote {
+  position: relative;
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg);
+  padding-left: var(--space-xl);
+  background-color: var(--bg-secondary);
+  border-left: 4px solid var(--accent-alert);
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  font-style: italic;
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+}
+
+.pull-quote::before {
+  content: "•";
+  position: absolute;
+  left: var(--space-sm);
+  top: var(--space-lg);
+  font-size: var(--text-2xl);
+  font-style: normal;
+}
+
+.pullquote p {
+  margin: 0;
 }
 
 /* === LINKS === */
