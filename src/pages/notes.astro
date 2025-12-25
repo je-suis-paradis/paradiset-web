@@ -1,16 +1,112 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all notes, sorted by publish date (newest first)
+const notes = (await getCollection('notes'))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
-<BaseLayout title="Notes" description="Short and choppy, nonsensical and epic,">
-    <main class="container">
-        <h1>P-Notes</h1>
-        <p>Gone are the times when the internet was a healthy dose of nonsense.</p>
-
-        <div style="margin-top: 2rem; padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border-color);">
-            <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-secondary);">
-                Maketh stupid again, th'internets. And why tumblr still is one of the greater internet sub-cultures.
-            </p>
-        </div>
-    </main>
+<BaseLayout title="Notes" description="Quick thoughts, images, links, and quotes">
+  <main class="container">
+    <h1>P-Notes</h1>
+    <p>Quick thoughts, observations, and fragments from the internet.</p>
+    
+    <div class="notes-feed">
+      {notes.map(async (note) => {
+        const { Content } = await note.render();
+        const noteType = note.data.type;
+        
+        return (
+          <article class={`note note--${noteType}`}>
+            <time datetime={note.data.publishDate.toISOString()}>
+              {note.data.publishDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </time>
+            
+            {note.data.title && <h2>{note.data.title}</h2>}
+            
+            <div class="note-content">
+              <Content />
+            </div>
+            
+            <span class="note-type-label">{noteType}</span>
+          </article>
+        );
+      })}
+    </div>
+  </main>
 </BaseLayout>
+
+<style>
+  .notes-feed {
+    margin-top: var(--space-xl);
+  }
+
+  .note {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+  }
+
+  .note:last-child {
+    border-bottom: none;
+  }
+
+  .note time {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .note h2 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-sm);
+  }
+
+  .note h2::before {
+    content: none;
+  }
+
+  .note-content {
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+  }
+
+  .note-type-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    opacity: 0.5;
+  }
+
+  /* Type-specific styling */
+  .note--quote {
+    font-style: italic;
+  }
+
+  .note--quote blockquote {
+    border-left: 4px solid var(--accent-alert);
+    padding-left: var(--space-md);
+    margin: 0;
+  }
+
+  .note--link a {
+    color: var(--accent-active);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+
+  .note--image img {
+    margin: var(--space-md) 0;
+  }
+</style> 
